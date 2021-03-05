@@ -43,7 +43,7 @@ int main()
     std::cout << "My " << a.getName() << " is " << a.getColor() << ".\n";
     std::cout << "My " << b.getName() << " is " << b.getColor() << ".\n";
     std::cout << "My " << c.getName() << " is " << c.getColor() << ".\n";
-    cout << endl;
+    std::cout << endl;
 
     Blackjack blackjack;
     srand(time(0));
@@ -54,51 +54,73 @@ int main()
     blackjack.deal(2, 0);
     blackjack.deal(1, 1);    
 
-    int end = -1;
+    int cmd = -1;
     bool first = true;
-    int bit = -1;
+    std::cout << "Взять еще(1) или закончить(0): ";
+    cin >> cmd;
     do {
-        end = -1;
         if (!blackjack.getStatus())
         {
-            cout << "Взять еще(1) или закончить(0): ";
-            cin >> end;
-            cout << "-------------------------------------------------\n";
-            blackjack.deal(1, 0);
-            blackjack.deal(1, 1);
-        }
-        else
-        {
-            cout << "-------------------------------------------------\n";
-            for (int i = 0; i < blackjack.getCountGamer(); ++i)
+            if (!first)
             {
-                if (blackjack.getSumGamer(i) > 21)
+                std::cout << "Взять еще(1) или закончить(0): ";
+                cin >> cmd;
+                std::cout << "-------------------------------------------------\n";
+                if (cmd == 1)
                 {
-                    cout << "Игрок № " << i + 1 << " проиграл. У него: " << blackjack.getSumGamer(i) << endl;
-                    bit = i;
+                    blackjack.deal(1, 0);
+                    blackjack.deal(1, 1);
                 }
+                else
+                    break;       
             }
-            if(bit == -1)
-                cout << "Крупье проиграл. У него: " << blackjack.getSumGamer(4) << endl;
             else
             {
-                if (blackjack.getSumGamer(4) > 21)
+                first = false;
+                if (cmd == 1)
                 {
-                    if(blackjack.getSumGamer(4) > blackjack.getSumGamer(bit))
-                        cout << "Игрок № " << bit + 1 << " проиграл. У него: " << blackjack.getSumGamer(bit) << endl;
-                    else
-                        cout << "Крупье проиграл. У него: " << blackjack.getSumGamer(4) << endl;
+                    blackjack.deal(1, 0);
+                    blackjack.deal(1, 1);
                 }
+                else
+                    break;
             }
-
-            return 0;
+            
         }
-    } while ( end >=1 || end <0);
+        
+    } while (!blackjack.getStatus());
+    std::cout << "while ended\n";
+    /*else
+        {
+        cout << "-------------------------------------------------\n";
+        for (int i = 0; i < blackjack.getCountGamer(); ++i)
+        {
+            if (blackjack.getSumGamer(i) > 21)
+            {
+                cout << "Игрок № " << i + 1 << " проиграл. У него: " << blackjack.getSumGamer(i) << endl;
+                bit = i;
+            }
+        }
+        if (bit == -1)
+            cout << "Крупье проиграл. У него: " << blackjack.getSumGamer(4) << endl;
+        else
+        {
+            if (blackjack.getSumGamer(4) > 21)
+            {
+                if (blackjack.getSumGamer(4) > blackjack.getSumGamer(bit))
+                    cout << "Игрок № " << bit + 1 << " проиграл. У него: " << blackjack.getSumGamer(bit) << endl;
+                else
+                    cout << "Крупье проиграл. У него: " << blackjack.getSumGamer(4) << endl;
+            }
+        }
+
+        return 0;
+        }*/
     
     blackjack.deal(1, 1);
     //сделать проверку у кого больше не вышли за 21
 
 
-    cout << endl;
+    std::cout << endl;
     return 0;
 };
