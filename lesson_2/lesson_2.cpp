@@ -55,31 +55,47 @@ int main()
     blackjack.deal(1, 1);    
 
     int end = -1;
+    bool first = true;
+    bool bit = false;
     do {
+        end = -1;
         if (!blackjack.getStatus())
         {
-            cout << "Взять еще(1) или закончить(0): ";
-            cin >> end;
+            if (first)
+            {
+                cout << "Взять еще(1) или закончить(0): ";
+                cin >> end;
+                first = false;
+            }
+            else
+            {
+                cout << "-------------------------------------------------\n";
+                end = -1;
+                blackjack.deal(1, 0);
+                blackjack.deal(1, 1);
+            }
         }
         else
         {
-
+            cout << "-------------------------------------------------\n";
+            for (int i = 0; i < blackjack.getCountGamer(); ++i)
+            {
+                if (blackjack.getSumGamer(i) > 21)
+                {
+                    cout << "Игрок № " << i + 1 << " проиграл. У него: " << blackjack.getSumGamer(i) << endl;
+                    bit = true;
+                }
+            }
+            if(!bit)
+                cout << "Крупье проиграл. У него: " << blackjack.getSumGamer(4) << endl;
+            return 0;
         }
-    } while (!blackjack.getStatus());
+    } while ( end >=1 || end <0);
+    
+    blackjack.deal(1, 1);
+    //сделать проверку у кого больше не вышли за 21
 
-    blackjack.addCardGamer(krupie, blackjack.getRandomCard());
-    cout << "Крупье выпало: " << blackjack.getCardGamer(4, 1) << endl;
 
-   /* for (int gamer = 0; gamer < blackjack.getCountGamer(); ++gamer)
-    {
-        for (int c = 0; c < blackjack.getCountCardGamer(gamer); ++c)
-            std::cout << "card gamer = " << blackjack.getCardGamer(gamer,c) << endl;
-    }
-    */
-
-    /*for(int i=0;i<blackjack.getCountCard();++i)
-        std::cout << "new " << i <<" Card = " << blackjack.getRandomCard() << endl;
-    */
     cout << endl;
     return 0;
 };
