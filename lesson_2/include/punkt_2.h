@@ -12,7 +12,6 @@ class Fruit
 		Fruit(string name, string color) : name(name), color(color) {}
 		string getColor();
 		string getName();
-
 };
 
 class Banana : public Fruit
@@ -20,12 +19,14 @@ class Banana : public Fruit
 	public:
 		Banana() : Fruit("banana", "yellow") {}
 };
+
 class Apple : public Fruit
 {
 	public:
 		Apple() {};
 		Apple(string color) : Fruit("apple", color) {}
 };
+
 class GrannySmith : public Apple
 {
 	public:

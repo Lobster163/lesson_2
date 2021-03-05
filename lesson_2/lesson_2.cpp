@@ -4,11 +4,11 @@ using namespace std;
 
 void genStudent(vector<Student>& class_1, int sizeGroup)
 {
-    for (int i = 0; i < sizeGroup; ++i)    //генерируем студентов
+    for (int i = 0; i < sizeGroup; ++i)  
         class_1.push_back(Student("name" + std::to_string(i), 18 + i, rand() % 1, 60 + i));
 };
 
-Student getStudent(vector<Student>&class_1, int number)
+Student getStudent(vector<Student>& class_1, int number)
 {
     return class_1[number];
 };
@@ -25,6 +25,8 @@ Student getStudent(vector<Student>& class_1, string name)
 
 int main()
 {
+    setlocale(LC_CTYPE, "rus");
+
     vector<Student>class_1;
     genStudent(class_1, 30);    //генерация студентов
     Student student = getStudent(class_1, 10);  //получаем по номеру
@@ -41,6 +43,43 @@ int main()
     std::cout << "My " << a.getName() << " is " << a.getColor() << ".\n";
     std::cout << "My " << b.getName() << " is " << b.getColor() << ".\n";
     std::cout << "My " << c.getName() << " is " << c.getColor() << ".\n";
-    
+    cout << endl;
+
+    Blackjack blackjack;
+    srand(time(0));
+    blackjack.resetGame();
+    blackjack.setCountGamer(1);
+
+    //первая раздача
+    blackjack.deal(2, 0);
+    blackjack.deal(1, 1);    
+
+    int end = -1;
+    do {
+        if (!blackjack.getStatus())
+        {
+            cout << "Взять еще(1) или закончить(0): ";
+            cin >> end;
+        }
+        else
+        {
+
+        }
+    } while (!blackjack.getStatus());
+
+    blackjack.addCardGamer(krupie, blackjack.getRandomCard());
+    cout << "Крупье выпало: " << blackjack.getCardGamer(4, 1) << endl;
+
+   /* for (int gamer = 0; gamer < blackjack.getCountGamer(); ++gamer)
+    {
+        for (int c = 0; c < blackjack.getCountCardGamer(gamer); ++c)
+            std::cout << "card gamer = " << blackjack.getCardGamer(gamer,c) << endl;
+    }
+    */
+
+    /*for(int i=0;i<blackjack.getCountCard();++i)
+        std::cout << "new " << i <<" Card = " << blackjack.getRandomCard() << endl;
+    */
+    cout << endl;
     return 0;
 };
