@@ -56,24 +56,16 @@ int main()
 
     int end = -1;
     bool first = true;
-    bool bit = false;
+    int bit = -1;
     do {
         end = -1;
         if (!blackjack.getStatus())
         {
-            if (first)
-            {
-                cout << "Взять еще(1) или закончить(0): ";
-                cin >> end;
-                first = false;
-            }
-            else
-            {
-                cout << "-------------------------------------------------\n";
-                end = -1;
-                blackjack.deal(1, 0);
-                blackjack.deal(1, 1);
-            }
+            cout << "Взять еще(1) или закончить(0): ";
+            cin >> end;
+            cout << "-------------------------------------------------\n";
+            blackjack.deal(1, 0);
+            blackjack.deal(1, 1);
         }
         else
         {
@@ -83,11 +75,22 @@ int main()
                 if (blackjack.getSumGamer(i) > 21)
                 {
                     cout << "Игрок № " << i + 1 << " проиграл. У него: " << blackjack.getSumGamer(i) << endl;
-                    bit = true;
+                    bit = i;
                 }
             }
-            if(!bit)
+            if(bit == -1)
                 cout << "Крупье проиграл. У него: " << blackjack.getSumGamer(4) << endl;
+            else
+            {
+                if (blackjack.getSumGamer(4) > 21)
+                {
+                    if(blackjack.getSumGamer(4) > blackjack.getSumGamer(bit))
+                        cout << "Игрок № " << bit + 1 << " проиграл. У него: " << blackjack.getSumGamer(bit) << endl;
+                    else
+                        cout << "Крупье проиграл. У него: " << blackjack.getSumGamer(4) << endl;
+                }
+            }
+
             return 0;
         }
     } while ( end >=1 || end <0);
