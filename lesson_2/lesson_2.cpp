@@ -2,23 +2,23 @@
 
 using namespace std;
 
-void genStudent(vector<Student>& class_1, int sizeGroup)
+void genStudent(vector<Student>& _class, int sizeGroup)
 {
     for (int i = 0; i < sizeGroup; ++i)  
-        class_1.push_back(Student("name" + std::to_string(i), 18 + i, rand() % 1, 60 + i));
+        _class.push_back(Student("name" + std::to_string(i), 18 + i, rand() % 1, 60 + i));
 };
 
-Student getStudent(vector<Student>& class_1, int number)
+Student getStudent(vector<Student>& _class, int number)
 {
-    return class_1[number];
+    return _class[number];
 };
 
-Student getStudent(vector<Student>& class_1, string name)
+Student getStudent(vector<Student>& _class, string name)
 {
-    for (int i = 0; i < (int)class_1.size(); ++i)
+    for (int i = 0; i < (int)_class.size(); ++i)
     {
-        if (class_1[i].printName() == name)
-            return class_1[i];
+        if (_class[i].printName() == name)
+            return _class[i];
     }
     return Student("error",-1,-1,-1);
 };
