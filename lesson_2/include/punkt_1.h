@@ -28,7 +28,7 @@ class Student : public Person
         int yearOfStudy = 0;
 
     public:
-        Student(string name, int year, int gender, int weight) : Person(name, year, gender, weight), yearOfStudy(0) {}
+        Student(const string& name, int year, int gender, int weight) : Person(name, year, gender, weight), yearOfStudy(0) {}
         void changeYoS(int yos);
         int printYoS();
 };
